@@ -10,7 +10,7 @@ Description: Useful presentation functions for results from logistic and
     use of robust standard errors, and a function that creates estimated
     linear combinations of coefficients (exponentiated
     or not) with CIs (robust or not).
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 

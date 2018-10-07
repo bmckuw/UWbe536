@@ -30,7 +30,6 @@ robust <- function(model, type = c("HC1"), df = Inf, expo = TRUE, level = .95, d
   expresult <- cbind(exp(coef(model)), exp(ci))
   colnames(expresult) <- c("exp(beta)", colnames(ci))
   expresult <- list(coef = result, expcoef = round(expresult,digits))
-  #fullresult <- ifelse(expo, list(coef = result, expcoef = expresult))
   return(expresult)
           }
 }
