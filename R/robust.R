@@ -18,12 +18,9 @@
 #' model <- glm(y~x, family = "binomial")
 #' robust(model)
 robust <- function(model, type = c("HC1"), df = Inf, expo = TRUE, level = .95, digits = 3){
-  requireNamespace("lmtest", quietly = TRUE)
-  requireNamespace("sandwich", quietly = TRUE)
-  requireNamespace("zoo", quietly = TRUE)
   requireNamespace("multcomp", quietly = TRUE)
-  result <-  coeftest(model, vcov = vcovHC, type = type, df = df)
-  ci <-  coefci(model, vcov = vcovHC, type = type, df = df, level = level)
+  result <-  coeftest(model, vcov. = vcovHC, type = type, df = df)
+  ci <-  coefci(model, vcov. = vcovHC, type = type, df = df, level = level)
   result <- cbind(result[,1:3],  ci, result[,4])
   colnames(result)[6] <- "Pval"
   colnames(result)[2] <- "Robust SE"

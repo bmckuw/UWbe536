@@ -25,7 +25,6 @@
 lincom <- function(model, lc, robust = FALSE, expo = TRUE, digits = 3, type = "HC1", level = .95, df = Inf){
   requireNamespace("multcomp", quietly = TRUE)
   requireNamespace("sandwich", quietly = TRUE)
-  requireNamespace("zoo", quietly = TRUE)
   if(robust) {result <- multcomp::glht(model, linfct = lc, vcov = vcovHC, type = type)
   ciname <- c("Robust CI")
   }
