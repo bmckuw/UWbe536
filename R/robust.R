@@ -23,11 +23,13 @@ robust <- function(model, type = c("HC1"), df = Inf, expo = TRUE, level = .95, d
   colnames(result)[6] <- "Pval"
   colnames(result)[2] <- "Robust SE"
   result <- round(result, digits)
+  if(!expo){return(result)}
+  else{
   expresult <- cbind(exp(coef(model)), exp(ci))
   colnames(expresult) <- c("exp(beta)", colnames(ci))
   expresult <- list(coef = result, expcoef = round(expresult,digits))
   #fullresult <- ifelse(expo, list(coef = result, expcoef = expresult))
-  if(expo) {return(expresult)}
-  else {return(result)}
+  return(expresult)
+          }
 }
 
