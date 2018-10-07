@@ -1,0 +1,19 @@
+Package: BIOSTEPI536functions
+Type: Package
+Title: BIOST/EPI 536 Utility Functions
+Version: 0.1.0
+Author: Barbara McKnight
+Maintainer: Barbara McKnight <bmck@uw.edu>
+Description: Useful presentation functions for results from logistic and 
+    Poisson regression in R. From glm models, contains a function that creates 
+    tables of exponentiated coefficients and CIs for them with or without 
+    use of robust standard errors, and a function that creates estimated
+    linear combinations of coefficients (exponentiated
+    or not) with CIs (robust or not).
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    lmtest (>= 0.9-36),
+    sandwich (>= 2.5-0)
+RoxygenNote: 6.1.0
