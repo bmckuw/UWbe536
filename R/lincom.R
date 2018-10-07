@@ -9,6 +9,9 @@
 #' @param type Character string giving type of robust standard error from sandwich package
 #' @param level Numeric confidence coefficient for CIs (as proportion)
 #' @param df Degrees of freedom for reference t distribution (Inf means Normal distribution)
+#' @import sandwich
+#' @importFrom stats coef confint.default pt
+#' @export lincom
 #' @return A table of linear combination values or exponentiated linear combination values with CI(s)s (robust or not) and P-value(s).
 #' @examples
 #' x1 <- rbinom(100, 2, .5)
@@ -18,13 +21,15 @@
 #' model <- glm(y~x1*x2, family = "binomial")
 #' variable.names(model)
 #' lincom(model, lc = "x1 + x1:x2 == 0")
+
 lincom <- function(model, lc, robust = FALSE, expo = TRUE, digits = 3, type = "HC1", level = .95, df = Inf){
-  requireNamespace(multcomp)
-  requireNamespace(sandwich)
-  if(robust) {result <- glht(model, linfct = lc, vcov = vcovHC, type = type)
+  requireNamespace("multcomp", quietly = TRUE)
+  requireNamespace("sandwich", quietly = TRUE)
+  requireNamespace("zoo", quietly = TRUE)
+  if(robust) {result <- multcomp::glht(model, linfct = lc, vcov = vcovHC, type = type)
   ciname <- c("Robust CI")
   }
-  else {result <- glht(model, linfct = lc)
+  else {result <- multcomp::glht(model, linfct = lc)
   ciname <- c("CI")
   }
   if(expo) {theta <- exp(coef(result))
@@ -42,3 +47,4 @@ lincom <- function(model, lc, robust = FALSE, expo = TRUE, digits = 3, type = "H
   cat("\nEstimate, ", round(100*level),"% ", ciname, ", and P-value:\n\n", sep = "")
   round(fullresult, digits)
 }
+

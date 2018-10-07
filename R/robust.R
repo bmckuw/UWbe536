@@ -6,6 +6,9 @@
 #' @param expo Logical expression indicating whether exponentiated linear combination of coefficients is requiested
 #' @param level Numeric confidence coefficient for CIs (as proportion)
 #' @param digits Number of digits to round to in output
+#' @import sandwich
+#' @import lmtest
+#' @export robust
 
 #' @return A table with coefficient estimates (exponentiated or not), CIs and P-values based on robust standard errors
 #' @examples
@@ -14,11 +17,13 @@
 #' y <- rbinom(100, 1, p = expit(x + .1))
 #' model <- glm(y~x, family = "binomial")
 #' robust(model)
-robust <- function(model, type = c("HC1"), df = Inf, expo = TRUE, level = .95, digits = 3) {
-  require(lmtest)
-  require(sandwich)
-  result <- coeftest(model, vcov = vcovHC, type = type, df = df)
-  ci <- coefci(model, vcov = vcovHC, type = type, df = df, level = level)
+robust <- function(model, type = c("HC1"), df = Inf, expo = TRUE, level = .95, digits = 3){
+  requireNamespace("lmtest", quietly = TRUE)
+  requireNamespace("sandwich", quietly = TRUE)
+  requireNamespace("zoo", quietly = TRUE)
+  requireNamespace("multcomp", quietly = TRUE)
+  result <-  coeftest(model, vcov = vcovHC, type = type, df = df)
+  ci <-  coefci(model, vcov = vcovHC, type = type, df = df, level = level)
   result <- cbind(result[,1:3],  ci, result[,4])
   colnames(result)[6] <- "Pval"
   colnames(result)[2] <- "Robust SE"
@@ -32,4 +37,5 @@ robust <- function(model, type = c("HC1"), df = Inf, expo = TRUE, level = .95, d
   return(expresult)
           }
 }
+
 

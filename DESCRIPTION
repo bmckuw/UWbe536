@@ -15,5 +15,6 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     lmtest (>= 0.9-36),
-    sandwich (>= 2.5-0)
+    sandwich (>= 2.5-0),
+    multcomp (>= 1.4-8)
 RoxygenNote: 6.1.0
