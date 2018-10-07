@@ -19,8 +19,8 @@
 #' variable.names(model)
 #' lincom(model, lc = "x1 + x1:x2 == 0")
 lincom <- function(model, lc, robust = FALSE, expo = TRUE, digits = 3, type = "HC1", level = .95, df = Inf){
-  require(multcomp)
-  require(sandwich)
+  requireNamespace(multcomp)
+  requireNamespace(sandwich)
   if(robust) {result <- glht(model, linfct = lc, vcov = vcovHC, type = type)
   ciname <- c("Robust CI")
   }
