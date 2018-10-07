@@ -1,6 +1,6 @@
-Package: UWBE536
+Package: UWbe536
 Type: Package
-Title: BIOST/EPI 536 Utility Functions
+Title: UW BIOST/EPI 536 Utility Functions
 Version: 0.1.0
 Author: Barbara McKnight
 Maintainer: Barbara McKnight <bmck@uw.edu>
